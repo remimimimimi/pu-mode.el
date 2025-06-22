@@ -1,4 +1,4 @@
-;;; pu.el --- toki pona dictionary lookup -*- lexical-binding: t -*-
+;;; pu-mode.el --- toki pona dictionary lookup -*- lexical-binding: t -*-
 
 ;; Author: remimimimimi
 ;; Version: 0.1.0
@@ -69,17 +69,17 @@
 
 (defun pu--word-info (word)
   "Get information about word from `pu--dict'."
-  (let* ((words (alist-get 'data pu--dict))
-         (word-symbol (intern word))
-         (word-info (alist-get word-symbol words)))
+  (when-let* ((words (alist-get 'data pu--dict))
+              (word-symbol (intern word))
+              (word-info (alist-get word-symbol words)))
     word-info))
 
 (defun pu--word-translation (word)
   "Translate toki pona word to chosen `pu-display-language'."
-  (let* ((word-info (pu--word-info word))
-         (word-def (or (alist-get 'pu_verbatim word-info)
-                       (alist-get 'def word-info)))
-         (translation (alist-get pu-display-language word-def)))
+  (when-let* ((word-info (pu--word-info word))
+              (word-def (or (alist-get 'pu_verbatim word-info)
+                            (alist-get 'def word-info)))
+              (translation (alist-get pu-display-language word-def)))
     translation))
 
 ;; TODO: Display all relevant information from `pu--word-info'.
@@ -112,4 +112,4 @@ CALLBACK is supplied by Eldoc, see `eldoc-documentation-functions'."
   :group 'convenience)
 
 (provide 'pu)
-;;; pu.el ends here
+;;; pu-mode.el ends here
