@@ -94,7 +94,8 @@ CALLBACK is supplied by Eldoc, see `eldoc-documentation-functions'."
 
 ;;;###autoload
 (define-minor-mode pu-mode "Show translation of toki pona words using eldoc."
-  :lighter "pu"
+  :lighter " pu"
+  :group 'pu
   (cond
    (pu-mode
     (pu-download-dictionary)
@@ -115,7 +116,7 @@ CALLBACK is supplied by Eldoc, see `eldoc-documentation-functions'."
 ;;;###autoload
 (define-global-minor-mode global-pu-mode pu-mode
   pu--enable
-  :group 'convenience)
+  :group 'pu)
 
 (provide 'pu-mode)
 ;;; pu-mode.el ends here
