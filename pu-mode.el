@@ -3,7 +3,7 @@
 ;; Author: remimimimimi
 ;; Version: 0.1.0
 ;; Package-Requires: ((emacs "30.1"))
-;; Homepage: https://github.com/remimimimimi/pu.el
+;; Homepage: https://github.com/remimimimimi/pu-mode.el
 ;; Keywords: toki pona eldoc
 
 ;; This file is not part of GNU Emacs
@@ -113,5 +113,5 @@ CALLBACK is supplied by Eldoc, see `eldoc-documentation-functions'."
   (lambda () (pu-mode 1))
   :group 'convenience)
 
-(provide 'pu)
+(provide 'pu-mode)
 ;;; pu-mode.el ends here
