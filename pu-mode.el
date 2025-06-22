@@ -2,7 +2,7 @@
 
 ;; Author: remimimimimi
 ;; Version: 0.1.0
-;; Package-Requires: url eldoc
+;; Package-Requires: ((emacs "30.1"))
 ;; Homepage: https://github.com/remimimimimi/pu.el
 ;; Keywords: toki pona eldoc
 
