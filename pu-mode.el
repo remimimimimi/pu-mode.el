@@ -40,9 +40,7 @@
   :group 'pu)
 
 (defcustom pu-dict-filename
-  (file-name-concat
-   (file-name-directory (or load-file-name (buffer-file-name)))
-   "data.json")
+  (file-name-concat user-emacs-directory "data.json")
   "Name of the dictionary file."
   :type 'string
   :group 'pu)
