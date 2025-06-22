@@ -88,10 +88,9 @@
   "Eldoc documentation function for live typst previews.
 
 CALLBACK is supplied by Eldoc, see `eldoc-documentation-functions'."
-  (let* ((word (current-word))
-         (translation (pu--word-translation word)))
-    (when (and word translation)
-      (funcall callback translation))))
+  (when-let* ((word (current-word))
+              (translation (pu--word-translation word)))
+    (funcall callback translation)))
 
 ;;;###autoload
 (define-minor-mode pu-mode "Show translation of toki pona words using eldoc."
