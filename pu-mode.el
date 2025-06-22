@@ -94,7 +94,7 @@ CALLBACK is supplied by Eldoc, see `eldoc-documentation-functions'."
 
 ;;;###autoload
 (define-minor-mode pu-mode "Show translation of toki pona words using eldoc."
-  :ligher "pu"
+  :lighter "pu"
   (cond
    (pu-mode
     (pu-download-dictionary)
