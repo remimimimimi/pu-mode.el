@@ -50,12 +50,14 @@
   :type 'symbol
   :group 'pu)
 
+;;;###autoload
 (defun pu-download-dictionary ()
   "Download dictionary file if not exists."
   (interactive)
   (unless (file-exists-p pu-dict-filename)
     (url-copy-file pu-dict-url pu-dict-filename t)))
 
+;;;###autoload
 (defun pu-delete-dictionary ()
   "Remove dictionary file."
   (interactive)
