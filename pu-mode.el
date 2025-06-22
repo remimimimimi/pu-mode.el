@@ -108,9 +108,13 @@ CALLBACK is supplied by Eldoc, see `eldoc-documentation-functions'."
      'eldoc-documentation-functions #'pu--display-in-eldoc
      t))))
 
+(defun pu--enable ()
+    (unless (minibufferp)
+      (pu-mode 1)))
+
 ;;;###autoload
 (define-global-minor-mode global-pu-mode pu-mode
-  (lambda () (pu-mode 1))
+  pu--enable
   :group 'convenience)
 
 (provide 'pu-mode)
