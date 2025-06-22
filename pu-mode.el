@@ -69,19 +69,40 @@
   (json-read-file pu-dict-filename))
 
 (defun pu--word-info (word)
-  "Get information about word from `pu--dict'."
+  "Get information about WORD from `pu--dict'."
   (when-let* ((words (alist-get 'data pu--dict))
               (word-symbol (intern word))
               (word-info (alist-get word-symbol words)))
     word-info))
 
 (defun pu--word-translation (word)
-  "Translate toki pona word to chosen `pu-display-language'."
+  "Translate toki pona WORD to chosen `pu-display-language'."
   (when-let* ((word-info (pu--word-info word))
               (word-def (or (alist-get 'pu_verbatim word-info)
                             (alist-get 'def word-info)))
               (translation (alist-get pu-display-language word-def)))
     translation))
+
+(defun pu--normalize-word (word)
+  "Return a copy of WORD without `.' `?' `!' `:' and ASCII downcased.
+Assume that WORD contains no whitespace."
+  (let* ((n (length word))
+         (out (make-string n ?\0))
+         (op 0))
+    (dotimes (i n)
+      (let ((c (aref word i)))
+        (unless (or (= c ?.) (= c ??) (= c ?!) (= c ?:))
+          ;; downcase A–Z
+          (aset out
+                op
+                (if (and (>= c ?A) (<= c ?Z))
+                    (+ c 32)
+                  c))
+          (setq op (1+ op)))))
+    ;; if we dropped any chars, truncate; else just return the full buffer
+    (if (/= op n)
+        (substring out 0 op)
+      out)))
 
 ;; TODO: Display all relevant information from `pu--word-info'.
 (defun pu--display-in-eldoc (callback)
@@ -89,7 +110,8 @@
 
 CALLBACK is supplied by Eldoc, see `eldoc-documentation-functions'."
   (when-let* ((word (current-word))
-              (translation (pu--word-translation word)))
+              (normalized-word (pu--normalize-word word))
+              (translation (pu--word-translation normalized-word)))
     (funcall callback translation)))
 
 ;;;###autoload
