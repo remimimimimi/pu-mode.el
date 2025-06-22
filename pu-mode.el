@@ -32,6 +32,7 @@
 ;;; Code:
 
 (require 'url)
+(require 'eldoc)
 
 (defcustom pu-dict-url "https://linku.la/jasima/data.json"
   "Url where to download linku.la dictionary file."
