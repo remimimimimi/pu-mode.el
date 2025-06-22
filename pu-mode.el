@@ -40,7 +40,7 @@
 
 (defcustom pu-dict-filename
   (file-name-concat
-   (file-name-directory (file-truename (buffer-file-name)))
+   (file-name-directory (or load-file-name (buffer-file-name)))
    "data.json")
   "Name of the dictionary file."
   :type 'string
