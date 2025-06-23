@@ -114,6 +114,9 @@ CALLBACK is supplied by Eldoc, see `eldoc-documentation-functions'."
               (translation (pu--word-translation normalized-word)))
     (funcall callback translation)))
 
+(defvar pu--dict (pu--read-dict)
+  "Internal variable for storing loaded dictionary.")
+
 ;;;###autoload
 (define-minor-mode pu-mode "Show translation of toki pona words using eldoc."
   :lighter " pu"
@@ -121,12 +124,10 @@ CALLBACK is supplied by Eldoc, see `eldoc-documentation-functions'."
   (cond
    (pu-mode
     (pu-download-dictionary)
-    (set (make-local-variable 'pu--dict) (pu--read-dict))
     (add-hook
      'eldoc-documentation-functions #'pu--display-in-eldoc
      nil t))
    (nil
-    (kill-local-variable 'pu--dict)
     (remove-hook
      'eldoc-documentation-functions #'pu--display-in-eldoc
      t))))
